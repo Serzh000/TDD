@@ -38,6 +38,7 @@ public:
 	{
 		string result = "";
 
+		shift %= 26;
 		
 		for (int i = 0; i < str.length(); i++)
 		{
@@ -131,3 +132,4 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
