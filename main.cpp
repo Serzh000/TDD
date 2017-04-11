@@ -70,12 +70,16 @@ TEST(Test_DDT_Pile, Test_Open_Folder2)
 	ASSERT_FALSE(cyp.OpenFolder("NOFOLDER"));
 }
 
-
-
 TEST(Test_DDT_Pile, Test_Cypher3)
 {
 	Cypher cyp;
 	ASSERT_EQ("cdef", cyp.EncryptKaisar("abcd",2));
+}
+
+TEST(Test_DDT_Pile, Test_Cypher4)
+{
+	Cypher cyp;
+	ASSERT_EQ("cdef", cyp.EncryptKaisar("abcd", 28));
 }
 
 int main(int argc, char* argv[])
@@ -91,3 +95,4 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
