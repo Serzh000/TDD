@@ -41,13 +41,31 @@ public:
 		
 		for (int i = 0; i < str.length(); i++)
 		{
-			if ((int)(str[i]) + shift > 122)
-				
-				result += (char)((int)(str[i]) + shift - 26);
-			
-			else
+			if (((int)(str[i]) < 65) || ((int)(str[i]) > 122))
+				result += str[i];
 
-				result += (char)((int)(str[i]) + shift);
+			if (((int)(str[i]) >= 97) && ((int)(str[i]) <= 122))
+			{
+
+				if ((int)(str[i]) + shift > 122)
+
+					result += (char)((int)(str[i]) + shift - 26);
+
+				else
+
+					result += (char)((int)(str[i]) + shift);
+			}
+
+			if (((int)(str[i]) >= 65) && ((int)(str[i]) <= 90))
+			{
+				if ((int)(str[i]) + shift > 90)
+
+					result += (char)((int)(str[i]) + shift - 26);
+
+				else
+
+					result += (char)((int)(str[i]) + shift);
+			}
 		}
 		
 
@@ -91,7 +109,7 @@ TEST(Test_DDT_Pile, Test_Cypher4)
 TEST(Test_DDT_Pile, Test_Cypher5)
 {
 	Cypher cyp;
-	ASSERT_EQ("Serezha, ne hodi v shkolu!", cyp.EncryptKaisar("Ykxkfng, tk nujo b ynqura!", 3));
+	ASSERT_EQ("Vhuhckd, qh krgl y vknrox!", cyp.EncryptKaisar("Serezha, ne hodi v shkolu!", 3));
 }
 
 int main(int argc, char* argv[])
@@ -107,6 +125,7 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
 
 
 
