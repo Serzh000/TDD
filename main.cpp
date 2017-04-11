@@ -74,6 +74,20 @@ public:
 		return result;
 	}
 
+	string DecryptKaisar(string str, int shift)
+	{
+		string result = "";
+
+			for (int i = 0; i < str.length(); i++)
+			{
+					
+				result += (char)((int)(str[i]) - shift);
+			}
+			
+			return result;
+	}
+
+
 	
 };
 
@@ -119,6 +133,13 @@ TEST(Test_DDT_Pile, Test_Cypher6)
 	ASSERT_EQ("Dpcpksl, yp szot g dsvzwf!", cyp.EncryptKaisar("Serezha, ne hodi v shkolu!", 1337));
 }
 
+TEST(Test_DDT_Pile, Test_Decypher1)
+{
+	Cypher cyp;
+	ASSERT_EQ("abcd", cyp.DecryptKaisar("bcde", 1));
+}
+
+
 int main(int argc, char* argv[])
 {
 	
@@ -132,4 +153,5 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
 
