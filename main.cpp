@@ -41,7 +41,13 @@ public:
 		
 		for (int i = 0; i < str.length(); i++)
 		{
-			result += (char)((int)(str[i]) + shift);
+			if ((int)(str[i]) + shift > 122)
+				
+				result += (char)((int)(str[i]) + shift - 26);
+			
+			else
+
+				result += (char)((int)(str[i]) + shift);
 		}
 		
 
@@ -95,4 +101,5 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
 
