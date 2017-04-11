@@ -112,6 +112,12 @@ TEST(Test_DDT_Pile, Test_Cypher5)
 	ASSERT_EQ("Vhuhckd, qh krgl y vknrox!", cyp.EncryptKaisar("Serezha, ne hodi v shkolu!", 3));
 }
 
+TEST(Test_DDT_Pile, Test_Cypher6)
+{
+	Cypher cyp;
+	ASSERT_EQ("Dpcpksl, yp szot g dsvzwf!", cyp.EncryptKaisar("Serezha, ne hodi v shkolu!", 1337));
+}
+
 int main(int argc, char* argv[])
 {
 	
@@ -125,7 +131,3 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
-
-
-
-
