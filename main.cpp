@@ -9,17 +9,17 @@
 
 using namespace std;
 
-class TestClass
-{
-
-};
-
-
 class Cypher
 {
+	
 
 };
 
+TEST(Test_DDT_Pile, Test_Open_Object)
+{
+	Cypher cyp;
+	ASSERT_NO_FATAL_FAILURE(cyp);
+}
 
 int main(int argc, char* argv[])
 {
