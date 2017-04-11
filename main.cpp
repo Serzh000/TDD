@@ -73,6 +73,12 @@ TEST(Test_DDT_Pile, Test_Cypher)
 	ASSERT_EQ("bcde", cyp.EncryptKaisar("abcd"));
 }
 
+TEST(Test_DDT_Pile, Test_Cypher2)
+{
+	Cypher cyp;
+	ASSERT_EQ("cdef", cyp.EncryptKaisar("abcd"));
+}
+
 int main(int argc, char* argv[])
 {
 	
@@ -86,4 +92,5 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
+
 
