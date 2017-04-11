@@ -34,14 +34,17 @@ public:
 		return false;
 	}
 
-	string EncryptKaisar(string str)
+	string EncryptKaisar(string str, int shift)
 	{
 		string result = "";
 
+		
 		for (int i = 0; i < str.length(); i++)
 		{
-			result += (char)((int)(str[i]) + 1);
+			result += (char)((int)(str[i]) + shift);
 		}
+		
+
 
 		return result;
 	}
@@ -67,16 +70,12 @@ TEST(Test_DDT_Pile, Test_Open_Folder2)
 	ASSERT_FALSE(cyp.OpenFolder("NOFOLDER"));
 }
 
-TEST(Test_DDT_Pile, Test_Cypher)
-{
-	Cypher cyp;
-	ASSERT_EQ("bcde", cyp.EncryptKaisar("abcd"));
-}
 
-TEST(Test_DDT_Pile, Test_Cypher2)
+
+TEST(Test_DDT_Pile, Test_Cypher3)
 {
 	Cypher cyp;
-	ASSERT_EQ("cdef", cyp.EncryptKaisar("abcd"));
+	ASSERT_EQ("cdef", cyp.EncryptKaisar("abcd",2));
 }
 
 int main(int argc, char* argv[])
@@ -92,5 +91,3 @@ int main(int argc, char* argv[])
 	
 	return 0;
 }
-
-
