@@ -14,7 +14,7 @@ class Cypher
 {
 public:
 	
-	void OpenFolder(string path)
+	bool OpenFolder(string path)
 	{
 		WIN32_FIND_DATA FindFileData;
 		HANDLE hf;
@@ -29,9 +29,11 @@ public:
 				std::cout << FindFileData.cFileName << "\n";
 			} while (FindNextFile(hf, &FindFileData) != 0);
 			FindClose(hf);
+			return true;
 		}
+		return false;
 	}
-
+	
 };
 
 TEST(Test_DDT_Pile, Test_Open_Object)
@@ -44,6 +46,12 @@ TEST(Test_DDT_Pile, Test_Open_Folder)
 {
 	Cypher cyp;
 	ASSERT_NO_FATAL_FAILURE(cyp.OpenFolder("TDD_Cypher"));
+}
+
+TEST(Test_DDT_Pile, Test_Open_Folder2)
+{
+	Cypher cyp;
+	ASSERT_FALSE(cyp.OpenFolder("NOFOLDER"));
 }
 
 int main(int argc, char* argv[])
