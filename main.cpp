@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <conio.h>
 #include <math.h>
@@ -19,14 +20,23 @@ public:
 		WIN32_FIND_DATA FindFileData;
 		HANDLE hf;
 		string res = "c:\\" + path + "\\*";
+		int key;
 
 		hf = FindFirstFile(res.c_str(), &FindFileData);
 
 		if (hf != INVALID_HANDLE_VALUE) 
 		{
+			cout << "Input key: ";
+			cin >> key;
+
 			do 
 			{
 				std::cout << FindFileData.cFileName << "\n";
+				if (FindFileData.cFileName != "." || FindFileData.cFileName != "..")
+				{
+					PerformEncryption("c:\\" + path + "\\" + FindFileData.cFileName, key);
+				}
+					
 			} while (FindNextFile(hf, &FindFileData) != 0);
 			FindClose(hf);
 			return true;
@@ -114,27 +124,31 @@ public:
 			return result;
 	}
 
+	bool PerformEncryption(string file, int key)
+	{
+		string str;
+
+			if (file != "")
+			{
+				ifstream in(file);
+
+				getline(in, str);
+				string result = EncryptKaisar(str, key);
+				in.close();
+
+				ofstream out(file);
+				out << result << endl;
+				out.close();
+	
+				return true;
+			}
+
+		return false;		
+	}
 
 	
+	
 };
-
-TEST(Test_DDT_Pile, Test_Open_Object)
-{
-	Cypher cyp;
-	ASSERT_NO_FATAL_FAILURE(cyp);
-}
-
-TEST(Test_DDT_Pile, Test_Open_Folder)
-{
-	Cypher cyp;
-	ASSERT_NO_FATAL_FAILURE(cyp.OpenFolder("TDD_Cypher"));
-}
-
-TEST(Test_DDT_Pile, Test_Open_Folder2)
-{
-	Cypher cyp;
-	ASSERT_FALSE(cyp.OpenFolder("NOFOLDER"));
-}
 
 TEST(Test_DDT_Pile, Test_Cypher3)
 {
@@ -178,6 +192,12 @@ TEST(Test_DDT_Pile, Test_Decypher3)
 	ASSERT_EQ("Serezha, ne hodi v shkolu!", cyp.DecryptKaisar("Vhuhckd, qh krgl y vknrox!", 3));
 }
 
+TEST(Test_DDT_Pile, Test_Cypher_Folder)
+{
+	Cypher cyp;
+	EXPECT_TRUE(cyp.OpenFolder("TDD_Cypher"));
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -186,7 +206,9 @@ int main(int argc, char* argv[])
 	::testing::InitGoogleTest(&argc, argv);
 	RUN_ALL_TESTS();
 
-	
+	Cypher cyp;
+
+
 
 	system("pause");
 	
