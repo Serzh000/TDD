@@ -21,27 +21,65 @@ public:
 		HANDLE hf;
 		string res = "c:\\" + path + "\\*";
 		int key;
+		int k;
 
 		hf = FindFirstFile(res.c_str(), &FindFileData);
 
-		if (hf != INVALID_HANDLE_VALUE) 
+		cout << "Enter 1 for encryption and decryption of 2\n";
+		cin >> k;
+		switch (k)
 		{
-			cout << "Input key: ";
-			cin >> key;
 
-			do 
+		case 1: {
+			if (hf != INVALID_HANDLE_VALUE)
 			{
-				std::cout << FindFileData.cFileName << "\n";
-				if (FindFileData.cFileName != "." || FindFileData.cFileName != "..")
+
+
+				cout << "Input key: ";
+				cin >> key;
+
+				do
 				{
-					PerformEncryption("c:\\" + path + "\\" + FindFileData.cFileName, key);
-				}
-					
-			} while (FindNextFile(hf, &FindFileData) != 0);
-			FindClose(hf);
-			return true;
+					std::cout << FindFileData.cFileName << "\n";
+					if (FindFileData.cFileName != "." || FindFileData.cFileName != "..")
+					{
+						PerformEncryption("c:\\" + path + "\\" + FindFileData.cFileName, key);
+					}
+
+				} while (FindNextFile(hf, &FindFileData) != 0);
+				FindClose(hf);
+				return true;
+				break;
+			}
+			return false;
+			break;
 		}
-		return false;
+
+		case 2: {
+			if (hf != INVALID_HANDLE_VALUE)
+			{
+
+
+				cout << "Input key: ";
+				cin >> key;
+
+				do
+				{
+					std::cout << FindFileData.cFileName << "\n";
+					if (FindFileData.cFileName != "." || FindFileData.cFileName != "..")
+					{
+						PerformDecryption("c:\\" + path + "\\" + FindFileData.cFileName, key);
+					}
+
+				} while (FindNextFile(hf, &FindFileData) != 0);
+				FindClose(hf);
+				return true;
+				break;
+			}
+			return false;
+			break;
+		}
+		}
 	}
 
 	string EncryptKaisar(string str, int shift)
@@ -146,7 +184,27 @@ public:
 		return false;		
 	}
 
-	
+	bool PerformDecryption(string file, int key)
+	{
+		string str;
+
+		if (file != "")
+		{
+			ifstream in(file);
+
+			getline(in, str);
+			string result = DecryptKaisar(str, key);
+			in.close();
+
+			ofstream out(file);
+			out << result << endl;
+			out.close();
+
+			return true;
+		}
+
+		return false;
+	}
 	
 };
 
